@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СКАТ-ВОМП — Симулятор определения мест повреждений</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="page-header">
+    <div class="header-inner">
+        <div class="logo-row">
+            <div class="logo-icon">⚡</div>
+            <div>
+                <div class="logo-name">СКАТ-ВОМП</div>
+                <div class="logo-sub">Симулятор волнового метода ОМП · ВЛ 10 кВ</div>
+            </div>
+        </div>
+        <div class="header-badges">
+            <span class="badge">Волновой метод</span>
+            <span class="badge">v = 300 м/мкс</span>
+            <span class="badge">Точность ±150 м</span>
+        </div>
+    </div>
+</header>
+
+<div class="app-body">
+
+    <div class="diagram-panel">
+        <div class="diagram-hint" id="diagram-hint">
+            ⬇ Нажмите на воздушную линию, чтобы смоделировать аварию
+        </div>
+        <svg id="network-svg" viewBox="0 0 1000 290"
+             preserveAspectRatio="xMidYMid meet"
+             role="img" aria-label="Однолинейная схема ВЛ 10 кВ">
+        </svg>
+    </div>
+
+    <aside class="info-panel">
+
+        <div class="panel-section">
+            <div class="section-title">Процесс</div>
+            <div class="steps-list" id="steps-list"></div>
+        </div>
+
+        <div class="panel-section">
+            <div class="section-title">Датчики СКАТ-ВОМП</div>
+            <div class="sensors-list" id="sensors-list"></div>
+        </div>
+
+        <div class="panel-section" id="calc-panel" style="display:none">
+            <div class="section-title">Расчёт ОМП</div>
+            <div id="calc-content"></div>
+        </div>
+
+    </aside>
+</div>
+
+<div class="bottom-bar">
+    <button class="btn btn-reset" id="btn-reset">↺ Сбросить</button>
+    <button class="btn btn-demo" id="btn-demo">▶ Авто-демо</button>
+    <div class="bottom-legend">
+        <span class="leg-item"><span class="leg-dot dot-sensor"></span>Датчик СКАТ-ВОМП</span>
+        <span class="leg-item"><span class="leg-dot dot-wave"></span>Бегущая волна</span>
+        <span class="leg-item"><span class="leg-dot dot-fault"></span>Место повреждения</span>
+    </div>
+</div>
+
+<script src="simulator.js"></script>
+</body>
+</html>
