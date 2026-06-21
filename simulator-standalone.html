@@ -6,25 +6,25 @@
     <title>СКАТ-ВОМП — Симулятор определения мест повреждений</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#0d1b2a">
+    <meta name="theme-color" content="#0891b2">
     <style>
 :root {
-    --bg-page: #0d1b2a;
-    --bg-card: #1a2e4a;
-    --bg-dark: #0a1828;
-    --color-line: #3b82f6;
-    --color-line-hover: #60a5fa;
+    --bg-page: #f0f4f8;
+    --bg-card: #ffffff;
+    --bg-dark: #f8fafc;
+    --color-line: #0891b2;
+    --color-line-hover: #0ea5e9;
     --color-line-fault: #ef4444;
-    --color-primary: #38bdf8;
-    --color-sensor-off: #1a4a2e;
-    --color-sensor-on: #00ff9d;
-    --color-wave: #fbbf24;
+    --color-primary: #0891b2;
+    --color-sensor-off: #d1fae5;
+    --color-sensor-on: #10b981;
+    --color-wave: #ef4444;
     --color-fault: #ef4444;
-    --color-data: #a78bfa;
-    --color-result: #00d4aa;
-    --color-text: #e2e8f0;
+    --color-data: #8b5cf6;
+    --color-result: #0d9488;
+    --color-text: #1e293b;
     --color-dim: #64748b;
-    --color-border: #1e3a5f;
+    --color-border: #e2e8f0;
     --radius: 8px;
     --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
@@ -87,9 +87,9 @@ body {
 }
 
 .badge {
-    background: rgba(56,189,248,0.08);
+    background: rgba(8,145,178,0.08);
     color: var(--color-primary);
-    border: 1px solid rgba(56,189,248,0.3);
+    border: 1px solid rgba(8,145,178,0.3);
     padding: 3px 10px;
     border-radius: 20px;
     font-size: 0.72rem;
@@ -123,8 +123,8 @@ body {
     font-size: 0.85rem;
     color: var(--color-primary);
     padding: 8px 12px;
-    background: rgba(56,189,248,0.07);
-    border: 1px dashed rgba(56,189,248,0.35);
+    background: rgba(8,145,178,0.07);
+    border: 1px dashed rgba(8,145,178,0.35);
     border-radius: 6px;
     margin-bottom: 10px;
     transition: opacity 0.4s;
@@ -200,12 +200,12 @@ body {
 }
 
 .step-item.active {
-    background: rgba(56,189,248,0.1);
+    background: rgba(8,145,178,0.08);
 }
 
 .step-item.active .step-num {
     background: var(--color-primary);
-    color: #0a1828;
+    color: #ffffff;
 }
 
 .step-item.active .step-text {
@@ -215,7 +215,7 @@ body {
 
 .step-item.done .step-num {
     background: var(--color-result);
-    color: #0a1828;
+    color: #ffffff;
 }
 
 .step-item.done .step-text {
@@ -248,8 +248,8 @@ body {
     width: 9px;
     height: 9px;
     border-radius: 50%;
-    background: #1a3a1e;
-    border: 1.5px solid #2a6a3a;
+    background: #d1fae5;
+    border: 1.5px solid #6ee7b7;
     flex-shrink: 0;
     transition: all 0.3s;
 }
@@ -300,10 +300,10 @@ body {
     color: var(--color-primary);
     text-align: center;
     padding: 6px;
-    background: rgba(56,189,248,0.06);
+    background: rgba(8,145,178,0.06);
     border-radius: 4px;
     margin-bottom: 10px;
-    border: 1px solid rgba(56,189,248,0.15);
+    border: 1px solid rgba(8,145,178,0.15);
 }
 
 .calc-row {
@@ -311,7 +311,7 @@ body {
     justify-content: space-between;
     align-items: baseline;
     padding: 3px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
 }
 
 .calc-row:last-child { border-bottom: none; }
@@ -339,7 +339,7 @@ body {
 .calc-steps .hi { color: var(--color-primary); }
 
 .calc-result-box {
-    background: rgba(0,212,170,0.08);
+    background: rgba(13,148,136,0.07);
     border: 1px solid var(--color-result);
     border-radius: 5px;
     padding: 10px;
@@ -393,14 +393,14 @@ body {
     color: var(--color-text);
 }
 
-.btn-reset:hover { background: #2a4a6a; }
+.btn-reset:hover { background: #cbd5e1; }
 
 .btn-demo {
     background: var(--color-primary);
-    color: #0a1828;
+    color: #ffffff;
 }
 
-.btn-demo:hover { background: #60d0ff; }
+.btn-demo:hover { background: #0ea5e9; }
 
 .btn-demo:disabled {
     opacity: 0.4;
@@ -509,7 +509,7 @@ body {
         <div class="diagram-hint" id="diagram-hint">
             ⬇ Нажмите на воздушную линию, чтобы смоделировать аварию
         </div>
-        <svg id="network-svg" viewBox="0 0 1000 290"
+        <svg id="network-svg" viewBox="0 0 1020 292"
              preserveAspectRatio="xMidYMid meet"
              role="img" aria-label="Однолинейная схема ВЛ 10 кВ">
         </svg>
@@ -654,7 +654,7 @@ function buildDefs() {
     fs.appendChild(m2);
     defs.appendChild(fs);
     const rg = mkEl('radialGradient', {id:'wave-grad'});
-    [['0%','#ffffff','1'],['35%','#fbbf24','0.9'],['100%','#f97316','0']].forEach(([o,c,op]) => {
+    [['0%','#ffffff','1'],['35%','#fca5a5','0.85'],['100%','#ef4444','0']].forEach(([o,c,op]) => {
         rg.appendChild(mkEl('stop', {offset:o, 'stop-color':c, 'stop-opacity':op}));
     });
     defs.appendChild(rg);
@@ -663,27 +663,32 @@ function buildDefs() {
 
 function buildServer() {
     const g = mkEl('g', {id:'server-icon'});
-    g.appendChild(mkEl('rect', {x:SERVER_X-42, y:SERVER_Y-16, width:84, height:30, rx:5, fill:'#0a1f35', stroke:'#38bdf8', 'stroke-width':'1.5'}));
-    g.appendChild(mkTxt('СЕРВЕР ОМП', {'text-anchor':'middle', x:SERVER_X, y:SERVER_Y-3, fill:'#38bdf8', 'font-size':'10', 'font-weight':'700', 'letter-spacing':'1', 'font-family':'Segoe UI,system-ui,sans-serif'}));
-    g.appendChild(mkTxt('обработка данных', {'text-anchor':'middle', x:SERVER_X, y:SERVER_Y+9, fill:'#475569', 'font-size':'8', 'font-family':'Segoe UI,system-ui,sans-serif'}));
-    g.appendChild(mkEl('line', {x1:SERVER_X, y1:SERVER_Y-16, x2:SERVER_X, y2:SERVER_Y-28, stroke:'#38bdf8', 'stroke-width':'1.5'}));
-    g.appendChild(mkEl('circle', {cx:SERVER_X, cy:SERVER_Y-31, r:'3', fill:'#38bdf8'}));
+    const cx = SERVER_X + 4, cy = SERVER_Y + 2;
+    // Cloud shape
+    const cp = `M ${cx-32},${cy+12} Q ${cx-46},${cy+12} ${cx-42},${cy+0} Q ${cx-42},${cy-12} ${cx-22},${cy-10} Q ${cx-14},${cy-26} ${cx+2},${cy-18} Q ${cx+8},${cy-34} ${cx+20},${cy-22} Q ${cx+42},${cy-24} ${cx+38},${cy-8} Q ${cx+48},${cy+0} ${cx+42},${cy+12} Z`;
+    g.appendChild(mkEl('path', {d:cp, fill:'#ffffff', stroke:'#94a3b8', 'stroke-width':'1.5'}));
+    g.appendChild(mkTxt('СКАТ', {'text-anchor':'middle', x:cx, y:cy-3, fill:'#0891b2', 'font-size':'12', 'font-weight':'800', 'letter-spacing':'1', 'font-family':'Segoe UI,system-ui,sans-serif'}));
+    g.appendChild(mkTxt('мониторинг', {'text-anchor':'middle', x:cx, y:cy+8, fill:'#64748b', 'font-size':'7', 'font-family':'Segoe UI,system-ui,sans-serif'}));
     svg.appendChild(g);
 }
 
 function buildSegmentLines() {
     const g = mkEl('g', {id:'seg-group'});
+    // Monitoring zone border
+    const zX = SVG_LEFT - 12, zY = LINE_Y - 40, zW = SVG_RIGHT - SVG_LEFT + 24, zH = 50;
+    g.appendChild(mkEl('rect', {x:zX, y:zY, width:zW, height:zH, rx:'4', fill:'rgba(8,145,178,0.03)', stroke:'#94a3b8', 'stroke-width':'1', 'stroke-dasharray':'6 3'}));
+    g.appendChild(mkTxt('Зона мониторинга СКАТ-ВОМП', {x:zX+8, y:zY-4, fill:'#94a3b8', 'font-size':'8.5', 'font-family':'Segoe UI,system-ui,sans-serif'}));
     SEGMENTS.forEach(seg => {
         const x1 = kmToX(NODES[seg.from].km);
         const x2 = kmToX(NODES[seg.to].km);
         const mx = (x1 + x2) / 2;
-        g.appendChild(mkEl('line', {x1, y1:LINE_Y, x2, y2:LINE_Y, stroke:'rgba(59,130,246,0.12)', 'stroke-width':'14'}));
-        g.appendChild(mkEl('line', {id:`seg-${seg.id}`, x1, y1:LINE_Y, x2, y2:LINE_Y, stroke:'#3b82f6', 'stroke-width':'2.5', 'stroke-linecap':'round'}));
-        g.appendChild(mkTxt(`${seg.km} км`, {'text-anchor':'middle', x:mx, y:LINE_Y-20, fill:'#475569', 'font-size':'10', 'font-family':'Segoe UI,system-ui,sans-serif'}));
+        g.appendChild(mkEl('line', {x1, y1:LINE_Y, x2, y2:LINE_Y, stroke:'rgba(8,145,178,0.12)', 'stroke-width':'10'}));
+        g.appendChild(mkEl('line', {id:`seg-${seg.id}`, x1, y1:LINE_Y, x2, y2:LINE_Y, stroke:'#0891b2', 'stroke-width':'3', 'stroke-linecap':'round'}));
+        g.appendChild(mkTxt(`${seg.km} км`, {'text-anchor':'middle', x:mx, y:LINE_Y-22, fill:'#64748b', 'font-size':'10', 'font-family':'Segoe UI,system-ui,sans-serif'}));
         const hit = mkEl('line', {x1, y1:LINE_Y, x2, y2:LINE_Y, stroke:'transparent', 'stroke-width':'24', cursor:'pointer'});
         hit.addEventListener('click', e => handleSegClick(e, seg.id));
-        hit.addEventListener('mouseenter', () => { if (S.phase === 'idle') document.getElementById(`seg-${seg.id}`).setAttribute('stroke','#60a5fa'); });
-        hit.addEventListener('mouseleave', () => { if (S.phase === 'idle') document.getElementById(`seg-${seg.id}`).setAttribute('stroke','#3b82f6'); });
+        hit.addEventListener('mouseenter', () => { if (S.phase === 'idle') document.getElementById(`seg-${seg.id}`).setAttribute('stroke','#0ea5e9'); });
+        hit.addEventListener('mouseleave', () => { if (S.phase === 'idle') document.getElementById(`seg-${seg.id}`).setAttribute('stroke','#0891b2'); });
         g.appendChild(hit);
     });
     svg.appendChild(g);
@@ -703,35 +708,73 @@ function buildTowers() {
 
 function drawTower(parent, cx) {
     cx = Math.round(cx);
-    parent.appendChild(mkEl('line', {x1:cx, y1:LINE_Y, x2:cx, y2:LINE_Y-30, stroke:'#2d3f52', 'stroke-width':'2', 'stroke-linecap':'round'}));
-    parent.appendChild(mkEl('line', {x1:cx-16, y1:LINE_Y-24, x2:cx+16, y2:LINE_Y-24, stroke:'#2d3f52', 'stroke-width':'2', 'stroke-linecap':'round'}));
-    [cx-14, cx+14].forEach(ix => {
-        parent.appendChild(mkEl('line', {x1:ix, y1:LINE_Y-24, x2:ix, y2:LINE_Y, stroke:'#3d5166', 'stroke-width':'1.5', 'stroke-dasharray':'2 2'}));
-    });
+    parent.appendChild(mkEl('line', {x1:cx, y1:LINE_Y, x2:cx, y2:LINE_Y-28, stroke:'#94a3b8', 'stroke-width':'1.8', 'stroke-linecap':'round'}));
+    parent.appendChild(mkEl('line', {x1:cx-13, y1:LINE_Y-22, x2:cx+13, y2:LINE_Y-22, stroke:'#94a3b8', 'stroke-width':'1.8', 'stroke-linecap':'round'}));
+    parent.appendChild(mkEl('line', {x1:cx-4, y1:LINE_Y-8, x2:cx-13, y2:LINE_Y-22, stroke:'#b4c5d5', 'stroke-width':'1', 'stroke-linecap':'round'}));
+    parent.appendChild(mkEl('line', {x1:cx+4, y1:LINE_Y-8, x2:cx+13, y2:LINE_Y-22, stroke:'#b4c5d5', 'stroke-width':'1', 'stroke-linecap':'round'}));
 }
 
 function buildNodes() {
     const g = mkEl('g', {id:'nodes-group'});
     NODES.forEach((node) => {
-        const x  = kmToX(node.km);
-        const bw = node.isMain ? 70 : 56;
-        const bh = node.isMain ? 66 : 56;
-        const by = LINE_Y + 20;
+        const x = kmToX(node.km);
         const ng = mkEl('g', {id:`node-${node.id}`});
-        ng.appendChild(mkEl('line', {x1:x, y1:LINE_Y, x2:x, y2:by, stroke:'#3b82f6', 'stroke-width':'2'}));
-        ng.appendChild(mkEl('rect', {x:x-4, y:LINE_Y+6, width:8, height:4, fill:'#0f2033', stroke:'#3b82f6', 'stroke-width':'1.5', rx:'1'}));
-        if (node.hasSensor) {
-            const bgY = by - 14;
-            ng.appendChild(mkEl('rect', {id:`sbg-${node.id}`, x:x-bw/2, y:bgY, width:bw, height:14, fill:'#071a0e', stroke:'#1a4a2e', 'stroke-width':'1', rx:'2 2 0 0'}));
-            ng.appendChild(mkTxt('СКАТ-ВОМП', {id:`slbl-${node.id}`, 'text-anchor':'middle', x, y:bgY+10, fill:'#1e6b35', 'font-size':'7.5', 'font-weight':'700', 'letter-spacing':'0.5', 'font-family':'Segoe UI,system-ui,sans-serif'}));
+        const F = 'Segoe UI,system-ui,sans-serif';
+
+        if (node.isMain) {
+            // ПС-1: large white cabinet with platform and lightning bolt
+            const cabW = 68, cabH = 74;
+            const cabY = LINE_Y + 16;
+            ng.appendChild(mkEl('line', {x1:x, y1:LINE_Y, x2:x, y2:cabY, stroke:'#0891b2', 'stroke-width':'2.5'}));
+            ng.appendChild(mkEl('rect', {x:x-cabW/2, y:cabY, width:cabW, height:cabH, rx:'5', fill:'#ffffff', stroke:'#94a3b8', 'stroke-width':'1.5'}));
+            ng.appendChild(mkEl('rect', {x:x-cabW/2-6, y:cabY+cabH, width:cabW+12, height:6, rx:'2', fill:'#e2e8f0', stroke:'#94a3b8', 'stroke-width':'1'}));
+            // orange lightning bolt
+            const ly = cabY + 18;
+            ng.appendChild(mkEl('path', {d:`M ${x+4},${ly} L ${x-5},${ly+14} L ${x},${ly+14} L ${x-3},${ly+28} L ${x+7},${ly+12} L ${x+2},${ly+12} Z`, fill:'#f97316'}));
+            ng.appendChild(mkTxt(node.label, {'text-anchor':'middle', x, y:cabY+cabH+21, fill:'#1e293b', 'font-size':'11.5', 'font-weight':'700', 'font-family':F}));
+            ng.appendChild(mkTxt(node.sub, {'text-anchor':'middle', x, y:cabY+cabH+33, fill:'#64748b', 'font-size':'8.5', 'font-family':F}));
+            ng.appendChild(mkTxt(`${node.km.toFixed(1)} км`, {'text-anchor':'middle', x, y:cabY+cabH+43, fill:'#94a3b8', 'font-size':'8', 'font-family':F}));
+            if (node.hasSensor) {
+                const devX = x + cabW/2 + 8, devY = cabY + 18;
+                const devW = 44, devH = 20, devCY = devY + devH/2;
+                ng.appendChild(mkEl('line', {id:`scon-${node.id}`, x1:x+cabW/2, y1:devCY, x2:devX, y2:devCY, stroke:'#94a3b8', 'stroke-width':'1', 'stroke-dasharray':'3 2'}));
+                ng.appendChild(mkEl('rect', {id:`sbg-${node.id}`, x:devX, y:devY, width:devW, height:devH, rx:'3', fill:'#ffffff', stroke:'#0891b2', 'stroke-width':'1.5'}));
+                ng.appendChild(mkTxt('СКАТ-ВОМП', {id:`slbl-${node.id}`, 'text-anchor':'middle', x:devX+devW/2, y:devY+13, fill:'#0891b2', 'font-size':'6.5', 'font-weight':'700', 'font-family':F}));
+                const gx = devX + devW + 4, gy = devCY;
+                [4,7,10].forEach((r,i) => ng.appendChild(mkEl('path', {d:`M ${gx},${gy-r} A ${r},${r} 0 0 1 ${gx},${gy+r}`, fill:'none', stroke:'#0891b2', 'stroke-width':'1.2', opacity:String(0.35+i*0.25), 'stroke-linecap':'round'})));
+                ng.appendChild(mkEl('circle', {id:`sdot-${node.id}`, cx:x, cy:LINE_Y, r:'5', fill:'#10b981', stroke:'#ffffff', 'stroke-width':'2'}));
+            }
+        } else {
+            // ТП-x: pole-mounted cabinet
+            const poleH = 46, cabW = 50, cabH = 56;
+            const cabY = LINE_Y + poleH;
+            ng.appendChild(mkEl('line', {x1:x, y1:LINE_Y, x2:x, y2:cabY, stroke:'#94a3b8', 'stroke-width':'2.5', 'stroke-linecap':'round'}));
+            ng.appendChild(mkEl('line', {x1:x-cabW/2+4, y1:cabY, x2:x+cabW/2-4, y2:cabY, stroke:'#94a3b8', 'stroke-width':'2'}));
+            ng.appendChild(mkEl('rect', {x:x-cabW/2, y:cabY, width:cabW, height:cabH, rx:'3', fill:'#f1f5f9', stroke:'#94a3b8', 'stroke-width':'1.5'}));
+            ng.appendChild(mkEl('rect', {x:x-cabW/2, y:cabY, width:cabW, height:10, rx:'2', fill:'#e2e8f0', stroke:'none'}));
+            // small lightning bolt
+            const ly = cabY + 18;
+            ng.appendChild(mkEl('path', {d:`M ${x+3},${ly} L ${x-4},${ly+11} L ${x+1},${ly+11} L ${x-2},${ly+21} L ${x+5},${ly+9} L ${x+1},${ly+9} Z`, fill:'#f97316'}));
+            ng.appendChild(mkTxt(node.label, {'text-anchor':'middle', x, y:cabY+cabH+13, fill:'#1e293b', 'font-size':'11', 'font-weight':'700', 'font-family':F}));
+            ng.appendChild(mkTxt(node.sub, {'text-anchor':'middle', x, y:cabY+cabH+24, fill:'#64748b', 'font-size':'8.5', 'font-family':F}));
+            ng.appendChild(mkTxt(`${node.km.toFixed(1)} км`, {'text-anchor':'middle', x, y:cabY+cabH+34, fill:'#94a3b8', 'font-size':'8', 'font-family':F}));
+            if (node.hasSensor) {
+                const devW = 44, devH = 20;
+                const devY = cabY + 14, devCY = devY + devH/2;
+                // nodes with km>4 get device on LEFT, others on RIGHT
+                const toLeft = node.km > 4.0;
+                const devX = toLeft ? x - cabW/2 - devW - 8 : x + cabW/2 + 8;
+                const conX1 = toLeft ? x - cabW/2 : x + cabW/2;
+                const conX2 = toLeft ? devX + devW : devX;
+                ng.appendChild(mkEl('line', {id:`scon-${node.id}`, x1:conX1, y1:devCY, x2:conX2, y2:devCY, stroke:'#94a3b8', 'stroke-width':'1', 'stroke-dasharray':'3 2'}));
+                ng.appendChild(mkEl('rect', {id:`sbg-${node.id}`, x:devX, y:devY, width:devW, height:devH, rx:'3', fill:'#ffffff', stroke:'#0891b2', 'stroke-width':'1.5'}));
+                ng.appendChild(mkTxt('СКАТ-ВОМП', {id:`slbl-${node.id}`, 'text-anchor':'middle', x:devX+devW/2, y:devY+13, fill:'#0891b2', 'font-size':'6.5', 'font-weight':'700', 'font-family':F}));
+                const gx = toLeft ? devX - 4 : devX + devW + 4;
+                const gy = devCY, sw = toLeft ? '0' : '1';
+                [4,7,10].forEach((r,i) => ng.appendChild(mkEl('path', {d:`M ${gx},${gy-r} A ${r},${r} 0 0 ${sw} ${gx},${gy+r}`, fill:'none', stroke:'#0891b2', 'stroke-width':'1.2', opacity:String(0.35+i*0.25), 'stroke-linecap':'round'})));
+                ng.appendChild(mkEl('circle', {id:`sdot-${node.id}`, cx:x, cy:LINE_Y, r:'5', fill:'#10b981', stroke:'#ffffff', 'stroke-width':'2'}));
+            }
         }
-        ng.appendChild(mkEl('rect', {x:x-bw/2, y:by, width:bw, height:bh, rx:'4', fill:'#08192a', stroke:'#1e3a5f', 'stroke-width':'1.5'}));
-        const ty = by + bh/2 - 4;
-        ng.appendChild(mkEl('circle', {cx:x, cy:ty-7, r:'9', fill:'none', stroke:'#2563eb', 'stroke-width':'1.5'}));
-        ng.appendChild(mkEl('circle', {cx:x, cy:ty+7, r:'9', fill:'none', stroke:'#2563eb', 'stroke-width':'1.5'}));
-        ng.appendChild(mkTxt(node.label, {'text-anchor':'middle', x, y:by+bh+13, fill:'#cbd5e1', 'font-size':'11', 'font-weight':'700', 'font-family':'Segoe UI,system-ui,sans-serif'}));
-        ng.appendChild(mkTxt(node.sub, {'text-anchor':'middle', x, y:by+bh+24, fill:'#4a5568', 'font-size':'8.5', 'font-family':'Segoe UI,system-ui,sans-serif'}));
-        ng.appendChild(mkTxt(`${node.km.toFixed(1)} км`, {'text-anchor':'middle', x, y:by+bh+35, fill:'#334155', 'font-size':'8', 'font-family':'Segoe UI,system-ui,sans-serif'}));
         g.appendChild(ng);
     });
     svg.appendChild(g);
@@ -778,11 +821,11 @@ function triggerSensorUI(nodeId, timeUs) {
     if (timeEl) { timeEl.className = 'sensor-time registered'; timeEl.textContent = `Сигнал: t = ${timeUs.toFixed(2)} мкс`; }
     const sbg  = document.getElementById(`sbg-${nodeId}`);
     const slbl = document.getElementById(`slbl-${nodeId}`);
-    if (sbg)  { sbg.setAttribute('fill','#0b3320'); sbg.setAttribute('stroke','#00ff9d'); }
-    if (slbl) { slbl.setAttribute('fill','#00ff9d'); }
+    if (sbg)  { sbg.setAttribute('fill','#f0fdf4'); sbg.setAttribute('stroke','#10b981'); }
+    if (slbl) { slbl.setAttribute('fill','#10b981'); }
     const nodeKm = NODES.find(n => n.id === nodeId).km;
     const nx = kmToX(nodeKm);
-    const ring = mkEl('circle', {cx:nx, cy:LINE_Y, r:'10', fill:'none', stroke:'#00ff9d', 'stroke-width':'2', opacity:'0.9'});
+    const ring = mkEl('circle', {cx:nx, cy:LINE_Y, r:'10', fill:'none', stroke:'#10b981', 'stroke-width':'2.5', opacity:'0.9'});
     document.getElementById('wave-g').appendChild(ring);
     animateRing(ring);
 }
@@ -804,12 +847,17 @@ function markFaultSegment(segId, faultX) {
     if (segEl) segEl.setAttribute('stroke','#ef4444');
     const fg = document.getElementById('fault-g');
     fg.innerHTML = '';
-    const pulse = mkEl('circle', {id:'fault-pulse', cx:faultX, cy:LINE_Y, r:'10', fill:'none', stroke:'#ef4444', 'stroke-width':'2', opacity:'0.7'});
+    const F = 'Segoe UI,system-ui,sans-serif';
+    // Pulsing outer ring
+    const pulse = mkEl('circle', {id:'fault-pulse', cx:faultX, cy:LINE_Y, r:'16', fill:'rgba(239,68,68,0.08)', stroke:'#ef4444', 'stroke-width':'1.5', opacity:'0.7'});
     fg.appendChild(pulse);
     animateFaultPulse(pulse);
-    const lp = `M ${faultX+1},${LINE_Y-16} L ${faultX-5},${LINE_Y-2} L ${faultX+1},${LINE_Y-2} L ${faultX-2},${LINE_Y+12} L ${faultX+7},${LINE_Y-2} L ${faultX+2},${LINE_Y-2} Z`;
-    fg.appendChild(mkEl('path', {d:lp, fill:'#fca5a5', stroke:'#ef4444', 'stroke-width':'1'}));
-    fg.appendChild(mkTxt('КЗ', {'text-anchor':'middle', x:faultX, y:LINE_Y+24, fill:'#ef4444', 'font-size':'9', 'font-weight':'700', 'font-family':'Segoe UI,system-ui,sans-serif'}));
+    // Red circle with X (⊗)
+    fg.appendChild(mkEl('circle', {cx:faultX, cy:LINE_Y, r:'11', fill:'#fef2f2', stroke:'#ef4444', 'stroke-width':'2.5'}));
+    const d = 6.5;
+    fg.appendChild(mkEl('line', {x1:faultX-d, y1:LINE_Y-d, x2:faultX+d, y2:LINE_Y+d, stroke:'#ef4444', 'stroke-width':'2.5', 'stroke-linecap':'round'}));
+    fg.appendChild(mkEl('line', {x1:faultX+d, y1:LINE_Y-d, x2:faultX-d, y2:LINE_Y+d, stroke:'#ef4444', 'stroke-width':'2.5', 'stroke-linecap':'round'}));
+    fg.appendChild(mkTxt('КЗ', {'text-anchor':'middle', x:faultX, y:LINE_Y+27, fill:'#ef4444', 'font-size':'9', 'font-weight':'700', 'font-family':F}));
 }
 
 function animateFaultPulse(circle) {
@@ -861,10 +909,10 @@ function startSimulation(segId, faultX, faultKm) {
 
 function createWaveElements() {
     const wg = document.getElementById('wave-g');
-    wg.appendChild(mkEl('line', {id:'trail-L', x1:S.faultX, y1:LINE_Y, x2:S.faultX, y2:LINE_Y, stroke:'#f97316', 'stroke-width':'4', opacity:'0.6', 'stroke-linecap':'round'}));
-    wg.appendChild(mkEl('line', {id:'trail-R', x1:S.faultX, y1:LINE_Y, x2:S.faultX, y2:LINE_Y, stroke:'#f97316', 'stroke-width':'4', opacity:'0.6', 'stroke-linecap':'round'}));
-    wg.appendChild(mkEl('circle', {id:'wave-L', cx:S.faultX, cy:LINE_Y, r:'12', fill:'url(#wave-grad)', filter:'url(#fw)'}));
-    wg.appendChild(mkEl('circle', {id:'wave-R', cx:S.faultX, cy:LINE_Y, r:'12', fill:'url(#wave-grad)', filter:'url(#fw)'}));
+    wg.appendChild(mkEl('line', {id:'trail-L', x1:S.faultX, y1:LINE_Y, x2:S.faultX, y2:LINE_Y, stroke:'#ef4444', 'stroke-width':'3.5', opacity:'0.5', 'stroke-linecap':'round'}));
+    wg.appendChild(mkEl('line', {id:'trail-R', x1:S.faultX, y1:LINE_Y, x2:S.faultX, y2:LINE_Y, stroke:'#ef4444', 'stroke-width':'3.5', opacity:'0.5', 'stroke-linecap':'round'}));
+    wg.appendChild(mkEl('circle', {id:'wave-L', cx:S.faultX, cy:LINE_Y, r:'11', fill:'url(#wave-grad)', filter:'url(#fw)'}));
+    wg.appendChild(mkEl('circle', {id:'wave-R', cx:S.faultX, cy:LINE_Y, r:'11', fill:'url(#wave-grad)', filter:'url(#fw)'}));
 }
 
 function animTick(now) {
@@ -981,24 +1029,24 @@ function showResult(resultKm, xFromL, L, R) {
     const rx = kmToX(resultKm);
     const rg = document.getElementById('result-g');
     rg.innerHTML = '';
-    rg.appendChild(mkEl('line', {x1:rx, y1:LINE_Y-40, x2:rx, y2:LINE_Y-18, stroke:'#00d4aa', 'stroke-width':'2', 'stroke-dasharray':'3 2'}));
-    rg.appendChild(mkEl('polygon', {points:`${rx-4},${LINE_Y-18} ${rx+4},${LINE_Y-18} ${rx},${LINE_Y-6}`, fill:'#00d4aa'}));
-    rg.appendChild(mkTxt(`${resultKm.toFixed(2)} км`, {'text-anchor':'middle', x:rx, y:LINE_Y-44, fill:'#00d4aa', 'font-size':'10', 'font-weight':'700', 'font-family':'Segoe UI,system-ui,sans-serif'}));
-    rg.appendChild(mkTxt('ОМП', {'text-anchor':'middle', x:rx, y:LINE_Y-55, fill:'#00d4aa', 'font-size':'8', 'font-family':'Segoe UI,system-ui,sans-serif'}));
+    rg.appendChild(mkEl('line', {x1:rx, y1:LINE_Y-40, x2:rx, y2:LINE_Y-18, stroke:'#0d9488', 'stroke-width':'2', 'stroke-dasharray':'3 2'}));
+    rg.appendChild(mkEl('polygon', {points:`${rx-4},${LINE_Y-18} ${rx+4},${LINE_Y-18} ${rx},${LINE_Y-6}`, fill:'#0d9488'}));
+    rg.appendChild(mkTxt(`${resultKm.toFixed(2)} км`, {'text-anchor':'middle', x:rx, y:LINE_Y-44, fill:'#0d9488', 'font-size':'10', 'font-weight':'700', 'font-family':'Segoe UI,system-ui,sans-serif'}));
+    rg.appendChild(mkTxt('ОМП', {'text-anchor':'middle', x:rx, y:LINE_Y-55, fill:'#0d9488', 'font-size':'8', 'font-family':'Segoe UI,system-ui,sans-serif'}));
     const errPx = 0.15 * PX_PER_KM;
-    rg.appendChild(mkEl('line', {x1:rx-errPx, y1:LINE_Y, x2:rx+errPx, y2:LINE_Y, stroke:'#00d4aa', 'stroke-width':'4', opacity:'0.4', 'stroke-linecap':'round'}));
+    rg.appendChild(mkEl('line', {x1:rx-errPx, y1:LINE_Y, x2:rx+errPx, y2:LINE_Y, stroke:'#0d9488', 'stroke-width':'4', opacity:'0.4', 'stroke-linecap':'round'}));
 }
 
 function reset() {
     if (S.raf) cancelAnimationFrame(S.raf);
     (S.timers || []).forEach(clearTimeout);
     S = {phase:'idle', faultSegId:null, faultKm:null, faultX:null, animStart:null, leftNodeIdx:null, rightNodeIdx:null, detected:{}, raf:null, stepIdx:0, timers:[]};
-    SEGMENTS.forEach(seg => { const el = document.getElementById(`seg-${seg.id}`); if (el) el.setAttribute('stroke','#3b82f6'); });
+    SEGMENTS.forEach(seg => { const el = document.getElementById(`seg-${seg.id}`); if (el) el.setAttribute('stroke','#0891b2'); });
     NODES.filter(n => n.hasSensor).forEach(node => {
         const sbg  = document.getElementById(`sbg-${node.id}`);
         const slbl = document.getElementById(`slbl-${node.id}`);
-        if (sbg)  { sbg.setAttribute('fill','#071a0e'); sbg.setAttribute('stroke','#1a4a2e'); }
-        if (slbl) { slbl.setAttribute('fill','#1e6b35'); }
+        if (sbg)  { sbg.setAttribute('fill','#ffffff'); sbg.setAttribute('stroke','#0891b2'); }
+        if (slbl) { slbl.setAttribute('fill','#0891b2'); }
     });
     ['trail-g','wave-g','fault-g','packet-g','result-g'].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = ''; });
     hintEl.classList.remove('hidden');
